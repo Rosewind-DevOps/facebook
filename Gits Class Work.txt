@@ -1,0 +1,963 @@
+GITS 
+
+Version Control Software (VCS) or Source Code Maintenance
+  - GitHub
+  - GitLab
+  - Bitbucket
+  - SVN
+  - TFS
+  - CVS
+
+1) Create Organization - One organization is Created
+   - https://github.com/Rosewind-DevOps/
+2) Create Repositories -N number of Repositories
+    i) Facebook Public
+	   - https://github.com/Rosewind-DevOps/facebook
+	   - git@github.com:Rosewind-DevOps/facebook.git
+	ii) Amazon  Private
+	   - https://github.com/Rosewind-DevOps/amazon.git
+	   - git@github.com:Rosewind-DevOps/amazon.git
+3) Create Team - N number Teams
+       - https://github.com/orgs/Rosewind-DevOps/teams/facebook-devteam
+4) Add Users/Resources
+5) Provide Access to the Repositories
+
+======================================================================================
+
+**IQ**
+1) What are the roles and responsibilities as a DevOps Engineer for GIT?
+  - For any new Project On-boarded
+    - Create repository
+	- Create Teams
+	- Add Users to Team
+	- Facilitate Repositories Access to User/Teams
+======================================================================================
+
+Once Repository is created an URL is generated and provided to Developers, who access remote responsibilities
+
+To Develop any code-- 
+ --First create and Empty Local Repository
+ --Install GIT Bash to execute commands
+ 
+ ###To check Version of GITBASH
+ - git --version
+
+Develop a code for Facebook App
+ ## Create folder in Laptop
+ - cd ~/Desktop/
+ - mkdir facebook
+ - cd facebook
+ - pwd
+ ## Create Empty local repository
+ - git init ## To create empty local repository
+ After Init list the files in facebook directory .. Below three files should be visible.
+    yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+$ ls -la
+total 41
+drwxr-xr-x 1 yugin 197609  0 Mar 29 11:10 ./
+drwxr-xr-x 1 yugin 197609  0 Mar 29 10:20 ../
+drwxr-xr-x 1 yugin 197609  0 Mar 29 11:14 .git/
+
+In GIT empty local repositories it manages three Logical Areas
+
+1)working Area                   2)Staging Area                3) Local Repository
+---------------                  ---------------                ------------------
+Once file is created              Files in this area            Files saved to local
+it will logically be placed       are called tracked             repositories
+in working tree                   files in staging tree/area
+                                  and files appear in green.   
+ 
+ ## Create files
+ 1) DBUtils.java
+ 2) Stringutils.java
+ 3) deploy.sh
+ 
+ Files in working area
+ are called Untracked
+ files -They are in red 
+ 
+## To check in which logical area the code is placed
+     -  git status
+
+ ## To move files to staging area
+     - git add .
+	 - git add *
+	 - git add *.java
+	 - git add *.sh
+	 - git add filename seperated by space
+Imp:  Developers use IDE( Integrated development Environment)
+    Backend
+	-------  
+	Eclipse
+	MyEClipse
+	Intellijs
+	
+	Front End
+	----------  
+	VSC
+	Atom
+## Configure user name and Email before Committing the code
+    $ git config --global user.name "yugedevops"
+	$ git config --global user.email "yugedevops@gmail.com"
+## To check if the config was done properly
+ 
+ $ git config --list --global
+    Output
+    user.name=Yugedevops
+    user.email=yugedevops@gmail.com
+
+* User details Can be modified whenever it is required
+
+    
+ ## Commit the files(save to Local Repository)
+   $ git commit -m "First Commit" (-m stands for message)
+ 
+ ## Check the status of files after Commit
+  $ git status
+  On branch master
+  nothing to commit, working tree clean
+ Code should be shared with other developers so it should move from local repository to remote repo.
+ To share the code the local repository should be mapped to remote repository.
+ ## To map remote repository url local repository url
+  $ git remote add fb https://github.com/Rosewind-DevOps/facebook.git
+ To check if it is mapped successfully
+  $ git remote -v
+    Output
+	------
+    fb      https://github.com/Rosewind-DevOps/facebook.git (fetch)
+    fb      https://github.com/Rosewind-DevOps/facebook.git (push)
+	
+Pre-requisite to push the code for the first time is user name and token
+
+## To get username 
+   $ git config --global --list
+   
+## To get the token info 
+ 1) Login to github site
+ 2) Navigate to Profile -> Settings -> Developers Settings (Last option found on Right hand side menu of the page
+ 3) Click Developers settings and click on Personal Tokens
+ 4) Delete Existing token
+ 5) Generate New Tokens and can give any Name
+ 6) Select 7 days to Expire
+ 7) Select Access levels and at the bottom click Generate token
+ 8) The new token can be seen only once advised to copy and paste in case we want to reuse
+ 
+    Token  :   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
+
+ ##To push the files or code  from Local repository
+  $ git push fb master (Branchname is Master) 
+  Enumerating objects: 10, done.
+  Counting objects: 100% (10/10), done.
+  Delta compression using up to 8 threads
+  Compressing objects: 100% (4/4), done.
+  Writing objects: 100% (10/10), 739 bytes | 369.00 KiB/s, done.
+  Total 10 (delta 1), reused 0 (delta 0), pack-reused 0
+  remote: Resolving deltas: 100% (1/1), done.
+   To https://github.com/Rosewind-DevOps/facebook.git
+   * [new branch]      master -> master
+ ## To Check if the files are properly pushed
+   $ git push fb master  
+     Everything up-to-date
+
+yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        testpush
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+$ git add testpush
+warning: LF will be replaced by CRLF in testpush.
+The file will have its original line endings in your working directory
+
+yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   testpush
+
+
+## To check number of commits and pushes
+$ git log
+commit 7cbed0d888965c74ac5eab9b850c1e810f1c7bb9 (HEAD -> master)
+Author: Yugedevops <yugedevops@gmail.com>
+Date:   Wed Mar 30 00:10:25 2022 +0800
+
+    Test Push
+
+commit d0fb8d7e768b92c26fa4e42723f7a6b476cbf985 (fb/master)
+Author: Yugedevops <yugedevops@gmail.com>
+Date:   Tue Mar 29 11:13:58 2022 +0800
+
+     2nd Push
+
+commit 30466f558c3706b8a8a70ced225a11c53f937987
+Author: Yugedevops <yugedevops@gmail.com>
+Date:   Tue Mar 29 10:40:55 2022 +0800
+
+    First Commit
+
+yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+
+Origin is Default Alias
+
+## for commiting in one command with out staging area
+note it works only on existing file
+ get commit -a -m "Direct git"
+ 
+=====================================================================================================================================================================================
+=====================================================================================================================================================================================
+
+## To display the remote repositories attached to local repositories
+   $ git remote -v
+     fb      https://github.com/Rosewind-DevOps/facebook.git (fetch)
+     fb      https://github.com/Rosewind-DevOps/facebook.git (push)
+	 
+## To remove the mapping for remote repositories remove alias
+   $ git remote remove fb 
+   
+## To check all the activities
+   $ git log
+
+## To Check last two log files
+   $ git log -2
+    commit 01022e00121dcb0ffb40ffeba0d34a86bd5ad588 (HEAD -> master)
+    Author: Yugedevops <yugedevops@gmail.com>
+    Date:   Wed Mar 30 00:37:37 2022 +0800
+
+    Partial commit
+
+    commit 9819a4c86eb97ccc69c5b9b2bde7c7b1b8bbeb1a (fb/master)
+    Author: Yugedevops <yugedevops@gmail.com>
+    Date:   Wed Mar 30 00:35:20 2022 +0800
+
+    failed Direct commit
+
+Interview question :
+
+How to find number of files committed from given committed IDE
+## To check the above
+   $ git show 9819a4c
+   Output
+   =======
+commit 9819a4c86eb97ccc69c5b9b2bde7c7b1b8bbeb1a (fb/master)
+Author: Yugedevops <yugedevops@gmail.com>
+Date:   Wed Mar 30 00:35:20 2022 +0800
+
+    failed Direct commit
+
+    diff --git a/testpush2 b/testpush2
+     new file mode 100644
+     index 0000000..1074159
+     --- /dev/null
+     +++ b/testpush2
+     @@ -0,0 +1 @@
+     +testing direct commit on new file it fails
+
+
+### To Display only the file names with Show command
+     $ git show --pretty="" --name-only 9819a4c
+     testpush2
+### To bring back files from staging are to working Area
+     Scenario
+	 ---------
+	 1) Status of files in working Area
+	    $ git status
+          On branch master
+          Changes to be committed:
+         (use "git restore --staged <file>..." to unstage)
+         new file:   3
+
+         Changes not staged for commit:
+         (use "git add <file>..." to update what will be committed)
+         use "git restore <file>..." to discard changes in working directory)
+         modified:   deploy.sh
+
+        Untracked files:
+        (use "git add <file>..." to include in what will be committed)
+         test.sh
+	 2) Add All files to staging Area
+	    $ git add .
+
+     3) Status of files in Staging Area
+	    $ git status
+        On branch master
+       Changes to be committed:
+      (use "git restore --staged <file>..." to unstage)
+        new file:   3
+        modified:   deploy.sh
+        new file:   test.sh
+	4) Move back files to work area from staging area
+	     $ git reset
+       Unstaged changes after reset:
+        M       deploy.sh
+	5) Status after reset
+	$ git status
+	On branch master
+	Changes not staged for commit:
+	(use "git add <file>..." to update what will be committed)
+	(use "git restore <file>..." to discard changes in working directory)
+        modified:   deploy.sh
+
+	Untracked files:
+	(use "git add <file>..." to include in what will be committed)
+        3
+        test.sh
+
+		no changes added to commit (use "git add" and/or "git commit -a")
+
+## To move back only one file to staging area
+      $git reset test.sh
+Scenario
+## To remove files that are not part of project from working area
+      1) Preview
+	     $ git clean -n
+         Would remove test.sh
+         Would remove test2.py
+	  2) Clean only new files
+	     $ git clean -f
+           Removing test.sh
+           Removing test2.py
+	  3) $ git status
+        On branch master
+        nothing to commit, working tree clean
+Scenario		
+## To Revert the files already pushed to remote repository.
+    1) Figure out the Commit ID
+	2) git revert commitID
+	   1) Deletes new file
+	   2) Reverts modification on existing files
+	   $ git revert f0fa69599
+      [master 7da9bab] Revert "new files again"
+       2 files changed, 2 deletions(-)
+       delete mode 100644 test.sh
+     3) Run Push to update reverted Changes in remote repository
+        $ git push fb master
+         Enumerating objects: 5, done.
+         Counting objects: 100% (5/5), done.
+         Delta compression using up to 8 threads
+         Compressing objects: 100% (3/3), done.
+         Writing objects: 100% (3/3), 314 bytes | 314.00 KiB/s, done.
+         Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+         remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+         To https://github.com/Rosewind-DevOps/facebook.git
+         f0fa695..7da9bab  master -> master
+		 
+What is the difference between GIT & GITHUB?
+---- 
+GIT -- Version control System
+      ~ It maintains commit ID's for each Versions
+GITHUB-- Hosting Service with GUI interfaces- Centralized Remote repositories
+
+Difference between GIT and SVN
+GIT - Distributed Version control system ( Each developer will have local repository mapped tp Remote repository System provided by GITHUB & BITBUCKET
+SVN & TFS - Only Version control Systems
+Scenario
+----------
+What is .gitignore file?
+A) To ignore additional files generated by IDE's which are not part of developed code and will not be allowed to commit
+    1) vi .gitignore
+	      .projects
+		  .class
+		  /node_modules
+		  :wq
+	2) It will remove the listed files from repositories
+	3) git add .gitignore
+	4) git commit -m "Added gitignore"
+	5) git push fb master
+=======================================================================================================================
+                                           Create Branches
+										   
+What are branches?
+- Default branch is called Master created along with repositories
+- Developers never use 'master' branch
+#####Creating a branch called development in the repository
+All developers will use development branch
+
+######Creating branch called staging for QA team to test the code
+QA team will test the code in staging branch
+
+### Once QA test results are positive it will be released to production or End users
+
+Branches
+--------  
+Master
+
+## To display the branches in repository
+    $ git branch
+     * master
+## To create a new branch
+    $ git branch development
+	
+    yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+   $ git branch
+   development
+  * master
+## To switch the Branch
+   yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+    $ git checkout development
+     Switched to branch 'development'
+   yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (development)
+    $ git branch
+     * development
+       master
+###Modify a file in development branch
+    (Once modified don't switch the branches uless it is committed)
+	# vi python
+	xxxxxxx
+	:wq
+	#git commit -a -m "updated Python file from Development Branch"
+	Switch to master
+	yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (development)
+   $ git checkout master
+   witched to branch 'master'
+ Changes made to file in development branch are not visible in master branch
+   yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+    $ cat python
+    new python files
+	
+#check the diffreence in branches
+   yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+    $ git diff development
+   diff --git a/python b/python
+   index 4c7d819..1ce5e51 100644
+    --- a/python
+   +++ b/pyth
+   @@ -1,2 +1 @@
+   new python files
+  -updating in Branch development
+## Merge the file
+git merge development
+  
+Interview question:
+If a same file was updated in two branches it results in merge conflicts which is not a healthy trend
+Then manually update the files and commit them in any of the repository and run
+
+git merge development
+
+## To create and check out to new Branch
+   yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+   $ git checkout -b stage
+  Switched to a new branch 'stage'
+
+  yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (stage)
+  $
+## To push all the branches to remote repository
+
+  $ $ git push fb --all
+   Enumerating objects: 15, done.
+   Counting objects: 100% (15/15), done.
+   Delta compression using up to 8 threads
+   Compressing objects: 100% (9/9), done.
+   Writing objects: 100% (12/12), 1.20 KiB | 1.20 MiB/s, done.
+   Total 12 (delta 4), reused 0 (delta 0), pack-reused 0
+   remote: Resolving deltas: 100% (4/4), completed with 1 local object.
+    To https://github.com/Rosewind-DevOps/facebook.git
+     922a827..b5b1e61  master -> master
+    * [new branch]      development -> development
+    * [new branch]      stage -> stage
+##To Delete a branch
+  1) cannot delete when you are in same branch
+  yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (development)
+   $ git branch -d stage
+    error: The branch 'stage' is not fully merged.
+ If you are sure you want to delete it, run 'git branch -D stage'.
+   $ git branch -D stage
+   Deleted branch stage (was b5b1e61).
+## To rename a branch..
+   yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (development)
+     $ git branch -m development dev
+
+    yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (dev)
+    $ git branch -m dev development
+
+yugin@Jaya MINGW64 ~/O
+
+## To delete Branch in remote repository
+
+  yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (development)
+  $ git push fb :stage
+  To https://github.com/Rosewind-DevOps/facebook.git
+   - [deleted]         stage
+   
+   
+======================================================================================================
+====================================================================================================== 
+
+# To delete file in working area
+
+$ git rm -f <filename>
+
+How to Create branches in remote repository 
+
+In GITHUB
+  - Navigate to Organization
+  - Navigate to repository
+  - Navigate to Branch
+  - Create  Branch
+To delete Branch 
+ - Go to Branches and delete the required Branch
+ - Restore Option is visible(Once the page is refreshed restore option disappears)
+ 
+ Scenario
+ --------- 
+ 
+Update file 2 in uat branch and the update should reflect in development
+- Only option in GITHUB is pull
+=========================================================================================================
+=========================================================================================================
+
+Difference between Branch & Tag
+
+1) Branch                       Tag
+   ======                       ===
+   - Mutable      				- Immutable
+   - On Going Dev elopment      - Tag is created after production deployment
+On which branch Tag is created --
+Master Branch it is stable branch.. 
+and code is deployed to production through master branch
+
+git branch branchname              git tag tagname
+git branch -d branch name          git tag -d tagname
+git push an -all                   git push --tags
+git push an branchname             git push an tag tagname
+
+
+We can create "n" number of tags.
+
+We can create Tags on any branch
+
+Scenario
+========= 
+## Create a git tag
+$git tag facebookv1.0.0
+$ git tag
+facebookv1.0.0
+
+## To push the tag to GITHUB Repo
+$ git push fb tag facebookv1.0.0
+Enumerating objects: 39, done.
+Counting objects: 100% (39/39), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (27/27), done.
+Writing objects: 100% (39/39), 3.07 KiB | 1.02 MiB/s, done.
+Total 39 (delta 13), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (13/13), done.
+To https://github.com/Rosewind-DevOps/facebook.git
+ * [new tag]         facebookv1.0.0 -> facebookv1.0.0
+
+## Check in GITHUB
+-Tag is visible 
+-Click on the tag two files will be visible
+  1) .Zipfile
+  2) tar.gz
+- The source code developed so far will be zipped into the tar files 
+  for future references and code check for previos versions after the release
+- So tag is important feature to reference previous versions of source code
+- every release comes along with its own tag.
+
+- Tags can be created at the GITHUB repsitory as well as milar to the creation of branches
+   -Navigate branch click on Tags
+   - Release
+    - Create new release
+     - Create new Tag 
+      - Select the branch and Publish
+## Delete a tag in GIT Bash
+ $ git tag -d facebookv1.0.0
+   Deleted tag 'facebookv1.0.0' (was f4f62c6)
+Cannot delete Tag in GITHub
+
+=======================================================================================
+GITSTASH
+Scenario
+=========
+
+-- Developers normally use development branch
+-- Sorce code has some issue and have to work on other branch
+-- It is recommended to commit the work in the existing brank before we checkout to other branch
+-- But code still in the staging area and it takes 2 more days to commit.
+-- With out disturbing the existing situation if it is required to work
+   on the issue arised in another branch git stash is helpful
+-- Once git stash is executed the code in the working area and the previous commit is placed in temporary storage area.
+--  Modify an Existing file deploy.sh
+   $ vi deploy.sh
+## Check the status (File should be in the Work tree)
+  $ git status
+  On branch development
+  Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   deploy.sh
+  no changes added to commit (use "git add" and/or "git commit -a")
+## Create a stash to save working area
+  $ git stash save "Git stash Demo 1"
+    Saved working directory and index state On development: Git stash Demo 1
+## To check the list of existing stashes
+  $ git stash list
+    stash@{0}: On development: Git stash Demo 1
+## Check the status of working area after stashing
+  $ git status
+  On branch development
+  nothing to commit, working tree clean
+## Check out of branch
+ $ git checkout master
+   Switched to branch 'master'
+## Switch back to development
+ $ git checkout development
+   Switched to branch 'development'
+================================================================================================================================================================
+Scenario
+--------
+
+To pull code from  Remote repsitory to Local repository below commands are used.
+## git pull 
+## git fetch 
+
+Difference between Pull & Fetch
+Remote Repo
+
+Local repo
+
+Working tree
+
+Git fetch -- Bring remote repo to local Repo again 
+Git merge -- local to Working tree
+Git pull  -- Git fetch + Git merge
+
+Git pull   -- If there is no code under development it is the best option it overwrites existing content in the working area
+Git fetch  -- If these is already a code under development and can update the higher version of the code by git fetch and merge
+Git Merge  -- To merge the files
+=====================================================================================================================================================================
+SSH Key 
+
+- Helps password less command
+ To generate ssh keys
+  ## Go to Home Directory
+    
+     $$ ssh-keygen
+ It creates .ssh directory and related keys
+	 cd .ssh
+	 $ ls -al
+   total 17
+   drwxr-xr-x 1 yugin 197609    0 Apr  9 14:49 ./
+   drwxr-xr-x 1 yugin 197609    0 Apr  9 14:49 ../
+  -rw-r--r-- 1 yugin 197609 2590 Apr  9 14:49 id_rsa       >>>> Private ssh key
+  -rw-r--r-- 1 yugin 197609  564 Apr  9 14:49 id_rsa.pub   >>>> Public SSH key
+  
+  RSA --is a encryption menthod
+  R - Rivest  (Ron Rivest)
+  S - Shamir  (Adi Shamir)
+  A - Adleman (Leonard Adleman)
+  
+  DSA - is one more encryption algorithm
+  D- Digital
+  S- Signature
+  A- Algorithm
+  ## To generate DSA
+  $$ ssh-keygen -t dsa
+  $ ls -ltr
+total 10
+-rw-r--r-- 1 yugin 197609  564 Apr  9 14:49 id_rsa.pub   >>>> Public SSH key
+-rw-r--r-- 1 yugin 197609 2590 Apr  9 14:49 id_rsa       >>>> Private ssh key
+-rw-r--r-- 1 yugin 197609 1373 Apr  9 15:06 id_dsa       >>>> Private ssh key
+-rw-r--r-- 1 yugin 197609  600 Apr  9 15:06 id_dsa.pub   >>>> Public SSH key
+
+Default Path for ssh keys is the home directory of the user
+    
+   cd ~/.ssh/
+   ls -ltr
+
+  ## Check the public id_rsa.pub
+     $$ cat id_rsa.pub
+     ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6r+nlbTMFnDv0zpJjGJ+wsrpXFP904lFNEfD4/PZPgWDOCP1o+i/z9Dj6EEZVLo1T+rUprZZH5uUd2ryzofjc/COfuuDLOOwpV/PA+aXdgpfQ0NGQEBzUMzsBIaKc8/AiYdkst3wZxNgnk8c2mfXIxYJuwulHmogOWEq1eX0nmIeB458V5TAyK5hOwt3muP52vNGBYcqfe716+Ewgx/98WiK6xvY18N5QGfD5AfhXC96G+fxeTRS46+jMchOXWEuSYaoiMqmWU/CMgJVqI0jXoqvcqcNxEN3oM+L5uVlApftM1NmH70pMOhop9fiNVIFIAUqiU5pWRQsREy8SQI8mvvs/74sgkY0Ypt0kvvJgLaAL0ORqisfa3Z6OzxMxRJXHNuo1cGtIvOatVv854yiFcBJSwJV02ngOQ3K2fIvUEO6qYAR3HitNgXssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC6r+nlbTMFnDv0zpJjGJ+wsrpXFP904lFNEfD4/PZPgWDOCP1o+i/z9Dj6EEZVLo1T+rUprZZH5uUd2ryzofjc/COfuuDLOOwpV/PA+aXdgpfQ0NGQEBzUMzsBIaKc8/AiYdkst3wZxNgnk8c2mfXIxYJuwulHmogOWEq1eX0nmIeB458V5TAyK5hOwt3muP52vNGBYcqfe716+Ewgx/98WiK6xvY18N5QGfD5AfhXC96G+fxeTRS46+jMchOXWEuSYaoiMqmWU/CMgJVqI0jXoqvcqcNxEN3oM+L5uVlApftM1NmH70pMOhop9fiNVIFIAUqiU5pWRQsREy8SQI8mvvs/74sgkY0Ypt0kvvJgLaAL0ORqisfa3Z6OzxMxRJXHNuo1cGtIvOatVv854yiFcBJSwJV02ngOQ3K2fIvUEO6qYAR3HitNgXHqtypgC6O+IBdeiqGHylJegdEx8WFNbR9d436SsryqxSYOax5iKw1/7l7p+Vk+5AM8CBTWH2M= yugin@JayaHqtypgC6O+IBdeiqGHylJegdEx8WFNbR9d436SsryqxSYOax5iKw1/7l7p+Vk+5AM8CBTWH2M= yugin@Jaya	 
+## Copy it in the GITHUB server
+    Goto
+	   - Profile
+	         |_ Settings
+	                 |_ SSH and GPG Keys
+					                 |_  New SSH Key 
+									               |_  Title
+												         |_  Add SSH Key
+
+## To test the ssh configuration status
+   $$ssh -T git@github.com
+   yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+      $ ssh -T git@github.com
+        The authenticity of host 'github.com (20.205.243.166)' can't be established.
+        ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+        This key is not known by any other names
+       Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+       Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+       Hi yugedevops! You've successfully authenticated, but GitHub does not provide shell access.
+
+   yugin@Jaya MINGW64 ~/OneDrive/Desktop/facebook (master)
+     $ ssh -T git@github.com
+       Hi yugedevops! You've successfully authenticated, but GitHub does not provide shell access.
+
+It is successfully.... 
+ Scenario
+  Try to login remote repository using SSH
+      Navigate To Repository facebook
+	                            |_ Code
+								      |_ Select SSH
+									            |_ COpy the SSH
+	
+### MAP SSH URL
+   $$git remote add fb-ssh git@github.com:Rosewind-DevOps/facebook.git
+   $ git remote -v
+     fb      https://github.com/Rosewind-DevOps/facebook.git (fetch)
+     fb      https://github.com/Rosewind-DevOps/facebook.git (push)
+     fb-ssh  git@github.com:Rosewind-DevOps/facebook.git (fetch)
+     fb-ssh  git@github.com:Rosewind-DevOps/facebook.git (push)
+Go tob Windows Credential Manager-- Delete the github.com credentials
+  
+   $ git push fb-ssh master
+     Enumerating objects: 11, done.
+     Counting objects: 100% (11/11), done.
+     Delta compression using up to 8 threads
+     Compressing objects: 100% (7/7), done.
+     Writing objects: 100% (7/7), 681 bytes | 681.00 KiB/s, done.
+     Total 7 (delta 4), reused 0 (delta 0), pack-reused 0
+     remote: Resolving deltas: 100% (4/4), completed with 2 local objects.
+     To github.com:Rosewind-DevOps/facebook.git
+     7a80eea..cd621a3  master -> master
+========================================================================================================================
+Fork
+====  
+To Gain access to other repositories we can fork the repository
+Version control Softwares
+
+GITS
+CVS
+SVN
+TFS
+BITBUCKET
+Perforce IBM
+=========================================================================================================================
+Personal Access Token(PAT)
+
+Generate Personal Access Token:
+
+Profile -> Setting -> Developer Settings -> Personal Access Tokens -> Generate New Token -> Valid for 30 --> 
+
+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
+
+
+Click On GitAPI
+
+-- Api's facilitate a path to automate automate activities.
+
+
+
+-HTTP Methods
+--------------- 
+Get - Get Information from the server
+Post - Create resources in the server
+Put- Update resources in the server
+Delete- Delete some thing in the server
+
+Create a script to createRepo.sh
+ $ vi Createrepo.sh
+   curl \
+     -X POST \
+	 -u yugedevops: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
+	 -H "Accept: application/vnd.github.v3+jason" \
+	 https://api.github.com/orgs/Rosewind-DevOps/repos \
+	 -d '{"name": "Rosewindrepo"}'
+
+Create a script to RemoveRepo.sh
+   $ vi Removerepo.sh
+   curl \
+     -X DELETE \
+	 -u yugedevops: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
+	 -H "Accept: application/vnd.github.v3+jason" \
+		 https://api.github.com/repos/Rosewind-DevOps/TestRepobyGitHubAPI
+	 -d '{"name": "TestRepobyGitHubAPI"}'
+	 
+Create script to Create Teams
+   $ Createteams.sh
+    curl \
+     -X POST \
+	  -u yugedevops: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
+     -H "Accept: application/vnd.github.v3+json" \
+      https://api.github.com/orgs/Rosewind-DevOps/teams \
+      -d '{"name":"RWAPITeam"}'
+	  
+Create script to Delete Teams
+    $ Removeteams.sh
+    curl -X DELETE
+	  -u yugedevops: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
+     -H "Accept: application/vnd.github.v3+json" \
+      https://api.github.com/orgs/Rosewind-DevOps/teams/RWAPITeam\
+      -d '{"team_slug":"RWAPITeam"}'
+	  
+Add User to the team
+   $ vi Addmember.sh
+       curl -X PUT
+	  -u yugedevops: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
+     -H "Accept: application/vnd.github.v3+json" \
+      https://api.github.com/orgs/Rosewind-DevOps/teams/RWAPITeam/memberships/Dmxyogi
+      -d '{"USERNAME":"Dmxyogi"}'
+	  
+Provide Repo Access to Team
+$ vi Addrepototeam.sh
+       curl -X PUT
+	  -u yugedevops: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
+     -H "Accept: application/vnd.github.v3+json" \
+     https://api.github.com/orgs/Rosewind-DevOps/teams/RWAPITeam/repos/Rosewind-DevOps/Rosewindrepo
+     -d '{"team_slug":"RWAPITeam"}'
+
+curl -X PUT -u yugedevops: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  -H "Accept: application/vnd.github.v3+json" https://api.github.com/orgs/Rosewind-DevOps/teams/RWAPITeam/repos/Rosewind-DevOps/Rosewindrepo 
+
+
+-u yugedevops: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
+
+
+	 Creating the Repository   Done
+	 Creating the Teams   Done
+	 Adding Users to the team Done
+	 Provide repo access to the team Done
+==============================================================================================================================================================================
+
+Branching strategies
+--------------------
+
+-Once a repository is created.. By default Branch is MASTER Branch is created
+- Developers wouldn't work on master branch
+- Create a branch for developers called Development
+- Developers develop a code and deploy it from Development Branch
+- From development code moves to stage branch
+- From the stage branch the the code is deoployed into QA/Pre-Prod or stage environment
+- once the code is tested ok..it moves to Production Env-- end users
+
+Depending the organization several other branches will be created..
+-Dev
+-QA
+-UAT ---  Business Analyst tests the application
+-SIT ---  System Integration testing to check the compatibility of code and analyse system requirements
+-Stress Testing --  for performance
+
+Finally Merged to Master branch
+--After deploying the production App is hit by the bug
+--From Master it goes to Bug-fix Environment -> Dev -> QA -> SIT -> UAT -> Master
+--Feature Branch-  To install a feature -> Dev -> QA/Pre-Prod -> Master
+================================================================================================================================================================================
+
+Git Rebase
+Git merge  -->> To integrate Code from one branch to another Branch
+comits DC1 Dc2 Dc3 DC4
+
+Git merge deployment
+
+It consider all commits as one object and merge into Master Branch
+Once merged it is difficult to idetify the actors of commit and details are missing 
+
+Git rebase intgrated as individual commits
+
+=================================================================================================================================================================================
+
+Readme fileAdd
+
+-- Help Document for Our Project 
+
+=================================================================================================================================================================================
+
+GIT Best Practice
+------------------
+1) Using Branch Strategy and Pull Request
+2) Commit Once you finish the task
+3) Don't Commit Half-Done work
+4) Test your code before commit
+5) Write appropriate commit message
+6) Try to use git commands rather than GUI tools
+7) Avoid Merge Commits
+
+=================================================================================================================================================================================
+
+
+
+
+
+T
+
+
+
+
+
+
+
+
+
+
+   
+
+
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+	  
+ 
+	   
